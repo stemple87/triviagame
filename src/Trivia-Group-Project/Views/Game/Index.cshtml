@@ -1,0 +1,23 @@
+﻿
+
+@{
+    ViewData["Title"] = "Game Page";
+}
+
+@model Dictionary<string, string>
+
+<h1>Play the trivia game!</h1>
+
+@*<p>@ViewBag.Question</p>*@
+<br/>
+@Model["question"]
+<br />
+@Model["answer"]
+
+@using (Html.BeginForm("Index", "Game", FormMethod.Post))
+{
+    <label for="answer">Submit your answer</label>
+    <input type="text" name="answer" />
+    <button type="submit" class="button" value="Index">Submit</button>
+}
+   

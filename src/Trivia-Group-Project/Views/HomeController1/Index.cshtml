@@ -1,0 +1,59 @@
+﻿
+
+@{
+    ViewData["Title"] = "Game Page";
+}
+
+
+
+<h1>Play the trivia game!</h1>
+
+
+<br />
+@Model["question"]
+<hr />
+<br />
+<div id="1"></div>
+<div id="2"></div>
+<div id="3"></div>
+<div id="4"></div>
+
+<div id="Answers"></div>
+<div class="show">show</div>
+
+
+@*//NOTE OUT PARTIAL VIEW*@
+<script type="text/javascript">
+    function shuffleArray(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+        return array;
+    }
+
+    $(document).ready(function () {
+        var arrayLength = 4;
+        var numberArray = [];
+        for (i = arrayLength; i > 0; i--)
+        {
+            numberArray.push(i);
+        }
+        
+        var randomizedArray = shuffleArray(numberArray);
+        
+        $('.show').click(function () {
+            
+           
+            
+
+            $("#" + randomizedArray[0] + "").append("<button>@Model["correctAnswer"]</button><br />")
+            $("#" + randomizedArray[1] + "").append("<button>@Model["otherAnswer1"]</button><br />")
+            $("#" + randomizedArray[2] + "").append("<button>@Model["otherAnswer2"]</button><br />")
+            $("#" + randomizedArray[3] + "").append("<button>@Model["otherAnswer3"]</button><br />")
+
+        });
+     });
+</script>
