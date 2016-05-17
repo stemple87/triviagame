@@ -14,5 +14,6 @@ namespace Trivia_Group_Project.Models
         public int PlayerId { get; set; }
         public string Email { get; set; }
         public int Points { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

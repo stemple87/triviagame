@@ -8,8 +8,8 @@ using Trivia_Group_Project.Models;
 namespace TriviaGroupProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20160517172753_Initial2")]
-    partial class Initial2
+    [Migration("20160517231329_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -147,6 +147,22 @@ namespace TriviaGroupProject.Migrations
                     b.HasAnnotation("Relational:TableName", "AspNetUsers");
                 });
 
+            modelBuilder.Entity("Trivia_Group_Project.Models.Player", b =>
+                {
+                    b.Property<int>("PlayerId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Email");
+
+                    b.Property<int>("Points");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("PlayerId");
+
+                    b.HasAnnotation("Relational:TableName", "Players");
+                });
+
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNet.Identity.EntityFramework.IdentityRole")
@@ -174,6 +190,13 @@ namespace TriviaGroupProject.Migrations
                         .WithMany()
                         .HasForeignKey("RoleId");
 
+                    b.HasOne("Trivia_Group_Project.Models.ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Trivia_Group_Project.Models.Player", b =>
+                {
                     b.HasOne("Trivia_Group_Project.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");
