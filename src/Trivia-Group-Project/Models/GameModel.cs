@@ -35,12 +35,13 @@ namespace Trivia_Group_Project.Models
             IRestResponse response = client.Execute(request);
 
             dynamic dyn = JsonConvert.DeserializeObject(response.Content);
+            Console.WriteLine(dyn);
 
             Random rnd = new Random();
-            int correct = rnd.Next(1, 50);
-            int random1 = rnd.Next(1, 50);
-            int random2 = rnd.Next(1, 50);
-            int random3 = rnd.Next(1, 50);
+            int correct = rnd.Next(1, 100);
+            int random1 = rnd.Next(1, 100);
+            int random2 = rnd.Next(1, 100);
+            int random3 = rnd.Next(1, 100);
 
 
             Dictionary<string, string> myDictionary = new Dictionary<string, string>();
@@ -49,6 +50,8 @@ namespace Trivia_Group_Project.Models
             myDictionary.Add("otherAnswer1", dyn[random1].answer.ToString());
             myDictionary.Add("otherAnswer2", dyn[random2].answer.ToString());
             myDictionary.Add("otherAnswer3", dyn[random3].answer.ToString());
+            myDictionary.Add("pointValue", dyn[correct].value.ToString());
+
 
 
             return myDictionary;
