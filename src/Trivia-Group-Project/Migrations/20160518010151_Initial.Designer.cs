@@ -8,7 +8,7 @@ using Trivia_Group_Project.Models;
 namespace TriviaGroupProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20160517231329_Initial")]
+    [Migration("20160518010151_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -155,6 +155,8 @@ namespace TriviaGroupProject.Migrations
                     b.Property<string>("Email");
 
                     b.Property<int>("Points");
+
+                    b.Property<int>("Tries");
 
                     b.Property<string>("UserId");
 

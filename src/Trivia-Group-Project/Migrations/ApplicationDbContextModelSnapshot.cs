@@ -155,6 +155,8 @@ namespace TriviaGroupProject.Migrations
 
                     b.Property<int>("Points");
 
+                    b.Property<int>("Tries");
+
                     b.Property<string>("UserId");
 
                     b.HasKey("PlayerId");

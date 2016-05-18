@@ -7,6 +7,7 @@ using RestSharp.Authenticators;
 using Microsoft.AspNet.Mvc;
 using Newtonsoft.Json;
 using Trivia_Group_Project.Models;
+using Microsoft.AspNet.Identity;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,6 +15,17 @@ namespace Trivia_Group_Project.Controllers
 {
     public class HomeController1 : Controller
     {
+        private readonly ApplicationDbContext _db;
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public HomeController1(
+            UserManager<ApplicationUser> userManager,
+            ApplicationDbContext db
+        )
+        {
+            _userManager = userManager;
+            _db = db;
+        }
         // GET: /<controller>/
         public IActionResult Index()
         {
@@ -34,26 +46,22 @@ namespace Trivia_Group_Project.Controllers
         public IActionResult Game()
         {
 
-
-            string userAnswer = Request.Form["answer"];
-            Console.WriteLine(userAnswer);
-
-
-            //Console.WriteLine(dyn.question);
-            //Console.WriteLine("Hello World");
-            //1
-            //var request = new RestRequest("Accounts/{{Account SID}}/Messages.json", Method.GET);
-            //client.Authenticator = new HttpBasicAuthenticator("{{Account SID}}", "{{Auth Token}}");
-            ////2
-            //var response = client.Execute(request);
-            //var answer = Request.Form["answer"];
             return View();
+
         }
 
+        ////Post /Game /Alternate
         //[HttpPost]
-        //public IActionResult Index()
+        //[HttpPost, ActionName("Index")]
+        //public async Task<IActionResult> Game()
         //{
-        //    return View();
+        //    //this needs to be fixed
+        //    var currentUser = await _userManager.FindByIdAsync(User.GetUserId());
+        //    return View(_db.Players.Where(x => x.User.Id == currentUser.Id));
+
+
+
         //}
+
     }
 }

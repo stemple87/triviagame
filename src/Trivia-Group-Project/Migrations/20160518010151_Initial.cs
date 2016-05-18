@@ -136,6 +136,7 @@ namespace TriviaGroupProject.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Email = table.Column<string>(nullable: true),
                     Points = table.Column<int>(nullable: false),
+                    Tries = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
