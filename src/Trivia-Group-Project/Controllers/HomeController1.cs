@@ -8,6 +8,7 @@ using Microsoft.AspNet.Mvc;
 using Newtonsoft.Json;
 using Trivia_Group_Project.Models;
 using Microsoft.AspNet.Identity;
+using System.Security.Claims;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -57,6 +58,19 @@ namespace Trivia_Group_Project.Controllers
         {
             return View();
         }
+        public IActionResult ShowPointValue()
+        {
+
+
+            Player player = new Player();
+            //ViewBag.Points = p.Points;
+            return View(player);
+
+            //Simon is working on the below two lines do not delete
+            //var currentPlayer = await _userManager.FindByIdAsync(User.GetUserId());
+            //return View(_db.Players.Where(x => x.User.Id == currentPlayer.Id));
+        }
+
 
         ////Post /Game /Alternate
         //[HttpPost]
