@@ -50,7 +50,15 @@ namespace Trivia_Group_Project.Models
             myDictionary.Add("otherAnswer1", dyn[random1].answer.ToString());
             myDictionary.Add("otherAnswer2", dyn[random2].answer.ToString());
             myDictionary.Add("otherAnswer3", dyn[random3].answer.ToString());
-            myDictionary.Add("pointValue", dyn[correct].value.ToString());
+            if(dyn[correct].value.ToString() == "")
+            {
+                myDictionary.Add("pointValue", "999");
+            }
+            else
+            {
+                myDictionary.Add("pointValue", dyn[correct].value.ToString());
+
+            }
 
 
 

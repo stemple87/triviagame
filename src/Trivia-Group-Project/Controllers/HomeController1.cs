@@ -10,11 +10,13 @@ using Trivia_Group_Project.Models;
 using Microsoft.AspNet.Identity;
 using System.Security.Claims;
 using Microsoft.Data.Entity;
+using Microsoft.AspNet.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Trivia_Group_Project.Controllers
 {
+    [Authorize]
     public class HomeController1 : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -71,26 +73,30 @@ namespace Trivia_Group_Project.Controllers
 
             _db.Entry(currentPlayer).State = EntityState.Modified;
             _db.SaveChanges();
+            ViewBag.Gameover = "Wrong Answer";
             if(currentPlayer.Tries <= 0)
             {
+                Console.WriteLine("Look here ---------------------------------------------------------------------");
                 Console.WriteLine("Game Over");
-                //save username and email to list
+                //save username and email to high scores list
+                ViewBag.GameOver = "Game Over";
+
                 currentPlayer.Tries = 5;
                 currentPlayer.Points = 0;
                 _db.Entry(currentPlayer).State = EntityState.Modified;
                 _db.SaveChanges();
                 //redirect to game over page
-                return View();
+                return View(currentPlayer);
             } else
             {
-                return View();
+                return View(currentPlayer);
             }
             
         }
         public async Task<IActionResult> ShowPointValue()
         {
             var currentPlayer = await _userManager.FindByIdAsync(User.GetUserId());
-            Console.WriteLine("Look here _______");
+            
             var test = _db.Players.FirstOrDefault(x => x.User.Id == currentPlayer.Id);
             Console.WriteLine(test.Points);
             return View(_db.Players.FirstOrDefault(x => x.User.Id == currentPlayer.Id));
