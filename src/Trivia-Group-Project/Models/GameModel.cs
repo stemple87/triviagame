@@ -45,8 +45,17 @@ namespace Trivia_Group_Project.Models
 
 
             Dictionary<string, string> myDictionary = new Dictionary<string, string>();
-            myDictionary.Add("question", dyn[correct].question.ToString());
-            myDictionary.Add("correctAnswer", dyn[correct].answer.ToString());
+            if (dyn[correct].question.ToString() == "")
+            {
+                myDictionary.Add("question", "What is earth's largest satelite?");
+                myDictionary.Add("correctAnswer", "The Moon");
+            }
+            else
+            {
+                myDictionary.Add("question", dyn[correct].question.ToString());
+                myDictionary.Add("correctAnswer", dyn[correct].answer.ToString());
+            }
+            
             myDictionary.Add("otherAnswer1", dyn[random1].answer.ToString());
             myDictionary.Add("otherAnswer2", dyn[random2].answer.ToString());
             myDictionary.Add("otherAnswer3", dyn[random3].answer.ToString());
