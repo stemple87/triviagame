@@ -3,16 +3,23 @@
 @{
     ViewData["Title"] = "Game Page";
 }
-
-@*@model TriviaGroupProject.Models.Player;*@ @*Instead we are going to use a Partial to show the score in the upper right hand corner*@
-
 <h1>Play the trivia game!</h1>
 <div id="Score">Score: </div>
+<p>
+    Point Value: @if(Model["pointValue"] == "")
+    {
+        <p>I'm sorry this has no points at the moment</p>
+    }
+    @if (Model["pointValue"] != "")
+    {
+         @Model["pointValue"]
+    }
+
+</p>
 
 
 <br />
 @Model["question"]
-@Model["pointValue"]
 <hr />
 <br />
 <div id="1"></div>

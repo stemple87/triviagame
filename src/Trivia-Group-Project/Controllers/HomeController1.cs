@@ -60,33 +60,11 @@ namespace Trivia_Group_Project.Controllers
         }
         public async Task<IActionResult> ShowPointValue()
         {
-
-
-            //Player player = new Player();
-            //ViewBag.Points = p.Points;
-            //return View(player);
-
-            //Simon is working on the below two lines do not delete
             var currentPlayer = await _userManager.FindByIdAsync(User.GetUserId());
             Console.WriteLine("Look here _______");
             var test = _db.Players.FirstOrDefault(x => x.User.Id == currentPlayer.Id);
             Console.WriteLine(test.Points);
             return View(_db.Players.FirstOrDefault(x => x.User.Id == currentPlayer.Id));
         }
-
-
-        ////Post /Game /Alternate
-        //[HttpPost]
-        //[HttpPost, ActionName("Index")]
-        //public async Task<IActionResult> Game()
-        //{
-        //    //this needs to be fixed
-        //    var currentUser = await _userManager.FindByIdAsync(User.GetUserId());
-        //    return View(_db.Players.Where(x => x.User.Id == currentUser.Id));
-
-
-
-        //}
-
     }
 }
