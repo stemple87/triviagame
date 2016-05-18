@@ -57,13 +57,13 @@
         {
             numberArray.push(i);
         }
-        
+
         var randomizedArray = shuffleArray(numberArray);
 
         $("#" + randomizedArray[0] + "").append("<button class='correct' data-toggle='modal' data-target='#textModal'>@Model["correctAnswer"]</button><br />")
-        $("#" + randomizedArray[1] + "").append("<button class='fail'>@Model["otherAnswer1"]</button><br />")
-        $("#" + randomizedArray[2] + "").append("<button class='fail'>@Model["otherAnswer2"]</button><br />")
-        $("#" + randomizedArray[3] + "").append("<button class='fail'>@Model["otherAnswer3"]</button><br />")
+        $("#" + randomizedArray[1] + "").append("<button class='fail' data-toggle='modal' data-target='#textModal'>@Model["otherAnswer1"]</button><br />")
+        $("#" + randomizedArray[2] + "").append("<button class='fail' data-toggle='modal' data-target='#textModal'>@Model["otherAnswer2"]</button><br />")
+        $("#" + randomizedArray[3] + "").append("<button class='fail' data-toggle='modal' data-target='#textModal'>@Model["otherAnswer3"]</button><br />")
 
         $(".correct").click(function () {
             $.ajax({
@@ -78,7 +78,15 @@
 
         })
         $(".fail").click(function () {
-            alert("You suck!");
+            $.ajax({
+                type: 'GET',
+                dataType: 'html',
+                data: { id: this.value },
+                url: '@Url.Action("WrongModal")',
+                success: function (result) {
+                    $('#Modal').html(result);
+                }
+            });
 
         })
      });
