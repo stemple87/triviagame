@@ -62,9 +62,30 @@ namespace Trivia_Group_Project.Controllers
             _db.SaveChanges();
             return View();
         }
-        public IActionResult WrongModal()
+        public async Task<IActionResult> WrongModal()
         {
-            return View();
+            var currentUser = await _userManager.FindByIdAsync(User.GetUserId());
+            var currentPlayer = _db.Players.FirstOrDefault(x => x.User.Id == currentUser.Id);
+            
+            currentPlayer.Tries--;
+
+            _db.Entry(currentPlayer).State = EntityState.Modified;
+            _db.SaveChanges();
+            if(currentPlayer.Tries <= 0)
+            {
+                Console.WriteLine("Game Over");
+                //save username and email to list
+                currentPlayer.Tries = 5;
+                currentPlayer.Points = 0;
+                _db.Entry(currentPlayer).State = EntityState.Modified;
+                _db.SaveChanges();
+                //redirect to game over page
+                return View();
+            } else
+            {
+                return View();
+            }
+            
         }
         public async Task<IActionResult> ShowPointValue()
         {
