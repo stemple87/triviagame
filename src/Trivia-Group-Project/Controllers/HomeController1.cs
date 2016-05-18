@@ -49,6 +49,10 @@ namespace Trivia_Group_Project.Controllers
             return View();
 
         }
+        public IActionResult CorrectModal()
+        {
+            return View();
+        }
 
         ////Post /Game /Alternate
         //[HttpPost]
