@@ -13,14 +13,20 @@ namespace Trivia_Group_Project.Models
     public class GameModel
     {
         [Key]
-        public int GameModelId { get; set; }
-        private string _question { get; set; }
-        private string _answer { get; set; }
+        public int GameId { get; set; }
+        public int Points { get; set; }
+        public string Email { get; set; }
 
-        public GameModel(string question, string answer)
+
+        public GameModel(int points, string email)
         {
-            _question = question;
-            _answer = answer;
+            Points = points;
+            Email = email;
+        }
+
+        public GameModel()
+        {
+
         }
 
         public static Dictionary<string, string> TriviaCall()

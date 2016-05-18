@@ -74,13 +74,19 @@ namespace Trivia_Group_Project.Controllers
             _db.Entry(currentPlayer).State = EntityState.Modified;
             _db.SaveChanges();
             ViewBag.Gameover = "Wrong Answer";
-            if(currentPlayer.Tries <= 0)
+            var points = currentPlayer.Points;
+            var email = currentPlayer.Email;
+
+            if (currentPlayer.Tries <= 0)
             {
                 Console.WriteLine("Look here ---------------------------------------------------------------------");
                 Console.WriteLine("Game Over");
                 //save username and email to high scores list
                 ViewBag.GameOver = "Game Over";
-
+                GameModel highScores = new GameModel(points, email);
+                _db.GameModels.Add(highScores);
+                _db.SaveChanges();
+                //reset game
                 currentPlayer.Tries = 5;
                 currentPlayer.Points = 0;
                 _db.Entry(currentPlayer).State = EntityState.Modified;

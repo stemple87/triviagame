@@ -14,6 +14,10 @@ namespace Trivia_Group_Project.Models
             base.OnModelCreating(builder);
             
         }
+
+
         public DbSet<Player> Players { get; set; }
+        public DbSet<GameModel> GameModels { get; set; }
+
     }
 }

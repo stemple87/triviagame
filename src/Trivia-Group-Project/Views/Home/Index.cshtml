@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model ICollection<Trivia_Group_Project.Models.GameModel>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
     <ol class="carousel-indicators">
@@ -64,35 +65,15 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-
-<div class="row">
-    <div class="col-md-3">
-        <h2>Application uses</h2>
-        <ul>
-            <li>Sample pages using ASP.NET MVC 6</li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkId=518007">Gulp</a> and <a href="http://go.microsoft.com/fwlink/?LinkId=518004">Bower</a> for managing client-side libraries</li>
-            <li>Theming using <a href="http://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
-        </ul>
-    </div>
-    <section id="fetch">
-        <input type="text" placeholder="Enter a movie title" id="term" />
-        <button id="search">Find me a poster</button>
-    </section>
-    <ul id="poster"></ul>
-
-
-    <script>
-   $(document).ready(function() {
-     $('#search').click(function(){
-       $.getJSON("http://jservice.io/api/clues", function(response) {
-         for(var i =0; i < 102; i++) {
-             $("#poster").append('<li>question: '+ response[i].question + " || answer: " + response[i].answer + '</li>')
-         }
-
-       })
-     })
-   })
-    </script>
-</div>
+<h2>Top Ten Highscores</h2>
+<ol>
+    @foreach (var highScore in Model)
+    {
+        <li>
+            @Html.DisplayFor(model => highScore.Email)
+            @highScore.Points
+        </li>
+    }
+</ol>
 
 

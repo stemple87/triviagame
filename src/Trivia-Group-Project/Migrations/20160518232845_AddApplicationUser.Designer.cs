@@ -8,9 +8,10 @@ using Trivia_Group_Project.Models;
 namespace TriviaGroupProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160518232845_AddApplicationUser")]
+    partial class AddApplicationUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
@@ -151,9 +152,9 @@ namespace TriviaGroupProject.Migrations
                     b.Property<int>("GameId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Email");
-
                     b.Property<int>("Points");
+
+                    b.Property<string>("UserId");
 
                     b.HasKey("GameId");
 
@@ -205,6 +206,13 @@ namespace TriviaGroupProject.Migrations
                         .WithMany()
                         .HasForeignKey("RoleId");
 
+                    b.HasOne("Trivia_Group_Project.Models.ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Trivia_Group_Project.Models.GameModel", b =>
+                {
                     b.HasOne("Trivia_Group_Project.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");
