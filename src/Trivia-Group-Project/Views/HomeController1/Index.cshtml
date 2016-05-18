@@ -68,7 +68,7 @@
 
         var randomizedArray = shuffleArray(numberArray);
 
-        $("#" + randomizedArray[0] + "").append("<button class='correct' data-toggle='modal' data-target='#textModal'>@Model["correctAnswer"]</button><br />")
+        $("#" + randomizedArray[0] + "").append("<button class='correct' data-toggle='modal' data-target='#textModal' value='@Model["pointValue"]'>@Model["correctAnswer"]</button><br />")
         $("#" + randomizedArray[1] + "").append("<button class='fail' data-toggle='modal' data-target='#textModal'>@Model["otherAnswer1"]</button><br />")
         $("#" + randomizedArray[2] + "").append("<button class='fail' data-toggle='modal' data-target='#textModal'>@Model["otherAnswer2"]</button><br />")
         $("#" + randomizedArray[3] + "").append("<button class='fail' data-toggle='modal' data-target='#textModal'>@Model["otherAnswer3"]</button><br />")
@@ -83,6 +83,7 @@
             }
         });
         $(".correct").click(function () {
+            console.log(this.value); 
             $.ajax({
                 type: 'GET',
                 dataType: 'html',

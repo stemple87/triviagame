@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Trivia_Group_Project.Models;
 using Microsoft.AspNet.Identity;
 using System.Security.Claims;
+using Microsoft.Data.Entity;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -50,8 +51,15 @@ namespace Trivia_Group_Project.Controllers
             return View();
 
         }
-        public IActionResult CorrectModal()
+        public async Task<IActionResult> CorrectModal(int id)
         {
+            int points = id;
+            var currentUser = await _userManager.FindByIdAsync(User.GetUserId());
+            var currentPlayer = _db.Players.FirstOrDefault(x => x.User.Id == currentUser.Id);
+            currentPlayer.Points += points;
+
+            _db.Entry(currentPlayer).State = EntityState.Modified;
+            _db.SaveChanges();
             return View();
         }
         public IActionResult WrongModal()
