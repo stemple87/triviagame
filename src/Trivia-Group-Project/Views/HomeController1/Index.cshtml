@@ -69,13 +69,15 @@
         $("#" + randomizedArray[3] + "").append("<button class='fail btn btn-block btn-lg btn-info' data-toggle='modal' data-target='#textModal' data-keyboard='false' data-backdrop='static'>@Model["otherAnswer3"]</button><br />")
     };
 
-    $(document).ready(function () {
 
+
+    $(document).ready(function () {
         setUpQuestions();
 
-        var timeOutFunction = setTimeout(function(){ timeOut() }, 8000);
+        var timeOutFunction = setTimeout(function () { timeOut() }, 8000);
 
         function timeOut() {
+            //TimeoutID
             console.log("timeOut function has run");
             $.ajax({
 
@@ -91,23 +93,46 @@
             });
 
         }
+        
 
-        function myStopFunction() {
-            clearInterval();
+        //Simon is working here now ***************
+        var initialTime = 6;
+
+        var timer = setInterval(function () { pageTimer(initialTime) }, 1000);
+
+        
+
+        var pageTimer = function () {
+            
+            console.log("Hello")
+
+            $(".countdown").text(initialTime)
+            initialTime--;
+            
+            if (initialTime < 0) {
+                clearInterval(timer);
+                initialTime = 6;
+            }
         }
+
+
+
+        
+        //Simon is working here now ***************
+
 
         //clearInterval(timeOutFunction);
         //----------
 
         // start the countdown
-        $(".countdown").text("7");
-        var TimeoutID = window.setTimeout(function(){ $(".countdown").text("6"); }, 1000);
-        var TimeoutID = window.setTimeout(function(){ $(".countdown").text("5"); }, 2000);
-        var TimeoutID = window.setTimeout(function(){ $(".countdown").text("4"); }, 3000);
-        var TimeoutID = window.setTimeout(function(){ $(".countdown").text("3"); }, 4000);
-        var TimeoutID = window.setTimeout(function(){ $(".countdown").text("2"); }, 5000);
-        var TimeoutID = window.setTimeout(function(){ $(".countdown").text("1"); }, 6000);
-        var TimeoutID = window.setTimeout(function(){ $(".countdown").text("0"); }, 6500);
+        //$(".countdown").text("7");
+        //var TimeoutID = window.setTimeout(function(){ $(".countdown").text("6"); }, 1000);
+        //var TimeoutID = window.setTimeout(function(){ $(".countdown").text("5"); }, 2000);
+        //var TimeoutID = window.setTimeout(function(){ $(".countdown").text("4"); }, 3000);
+        //var TimeoutID = window.setTimeout(function(){ $(".countdown").text("3"); }, 4000);
+        //var TimeoutID = window.setTimeout(function(){ $(".countdown").text("2"); }, 5000);
+        //var TimeoutID = window.setTimeout(function(){ $(".countdown").text("1"); }, 6000);
+        //var TimeoutID = window.setTimeout(function(){ $(".countdown").text("0"); }, 6500);
 
 
         //-------
@@ -121,6 +146,8 @@
             }
         });
         $(".correct").click(function () {
+            clearTimeout(timeOutFunction);
+            clearInterval(timer);
             console.log(this.value);
             $.ajax({
 
@@ -137,6 +164,8 @@
 
         })
         $(".fail").click(function () {
+            clearTimeout(timeOutFunction);
+            clearInterval(timer);
             $.ajax({
 
                 type: 'GET',
