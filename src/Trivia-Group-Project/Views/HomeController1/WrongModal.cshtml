@@ -1,22 +1,23 @@
 ﻿@{
     Layout = "";
 }
+<div class="myModal">
+    <h3>@ViewBag.Gameover</h3>
 
-<h3>@ViewBag.Gameover</h3>
-
-@if (ViewBag.Gameover == "Game Over")
-{
-    <br />
-    <br />
-    <a href="/"><button class="btn-danger btn btn-lg btn-default"id="gameOver">Game Over</button></a>
-    <br />
-    <br />
-}
-else
-{
-    <br />
-    <br />
-    <a href="/HomeController1"><button class="btn-warning btn btn-lg btn-default" id="wrongAnswer">Next Question</button></a>
-    <br />
-    <br />
-}
+    @if (ViewBag.Gameover == "Game Over")
+    {
+        <br />
+        <br />
+        <a href="/"><button class="btn-danger btn btn-lg btn-default" id="gameOver">Game Over</button></a>
+        <br />
+        <br />
+    }
+    else
+    {
+        <br />
+        <br />
+        <a href="/HomeController1"><button class="btn-warning btn btn-lg btn-default" id="wrongAnswer">Next Question</button></a>
+        <br />
+        <br />
+    }
+</div>

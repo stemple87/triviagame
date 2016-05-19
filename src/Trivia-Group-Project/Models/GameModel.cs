@@ -67,7 +67,7 @@ namespace Trivia_Group_Project.Models
             myDictionary.Add("otherAnswer3", dyn[random3].answer.ToString());
             if(dyn[correct].value.ToString() == "")
             {
-                myDictionary.Add("pointValue", "999");
+                myDictionary.Add("pointValue", "250");
             }
             else
             {

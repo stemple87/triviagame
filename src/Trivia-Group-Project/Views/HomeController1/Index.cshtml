@@ -3,25 +3,19 @@
 @{
     ViewData["Title"] = "Game Page";
 }
-<h1>Play the trivia game!</h1>
+
+<div id="playerInfo">
+<h1>Trivia!</h1>    
 <div id="Score">Score: </div>
-<p>
-    Point Value: @if(Model["pointValue"] == "")
-    {
-        <p>SPECIAL CASE</p>
-    }
-    @if (Model["pointValue"] != "")
-    {
-         @Model["pointValue"]
-    }
-
-</p>
-
-
-<br />
-@Model["question"]
+    
+    
+</div>
 <hr />
 <br />
+<h1>@Model["question"]</h1>
+<h3>Point Value: @Model["pointValue"]</h3>
+<hr />
+
 <div id="1"></div>
 <div id="2"></div>
 <div id="3"></div>
@@ -43,7 +37,6 @@
     </div>
 </div>
 <!-- End of Modal -->
-@Html.ActionLink("Return to Homepage", "Index", "Home")
 
 
 @*//NOTE OUT PARTIAL VIEW*@

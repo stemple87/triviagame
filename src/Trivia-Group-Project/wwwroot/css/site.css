@@ -32,3 +32,10 @@ textarea {
         z-index: 10 !important;
     }
 }
+
+.myModal {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 12%;
+}
