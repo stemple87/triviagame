@@ -74,31 +74,25 @@
 
     <div class="row">
         <div class="col-md-1"><h4>Ranking:</h4></div>
-        <div class="col-md-2"></div>
-        <div class="col-md-3"><h4>Player Email:</h4></div>
-        <div class="col-md-4"><h4>High Scores:</h4></div>
-        @*<div class="col-md-1"></div>*@
+        <div class="col-md-4"><h4>Player Email:</h4></div>
+        <div class="col-md-3"><h4>High Scores:</h4></div>
     </div>
     <hr />
     <ol>
         @foreach (var highScore in Model)
         {
-            <li>
-                <div class="row" id="alig-cent">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-4">
-                        @highScore.Email
-
-                    </div>
-                    <div class="col-md-4">
-                        @highScore.Points
-                    </div>
-                    @*<div class="col-md-2"></div>*@
-                   
+        <li>
+            <div class="row" id="alig-cent">
+                <div class="col-md-1"></div>
+                <div class="col-md-3">
+                    @highScore.Email
                 </div>
-                
-            </li>
-            <hr />
+                <div class="col-md-4">
+                    @highScore.Points
+                </div>
+            </div>
+        </li>
+        <hr />
         }
     </ol>
 </div>
