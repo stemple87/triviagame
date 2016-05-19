@@ -5,7 +5,7 @@ JeopardyTriviaGame using .net C# and jservice.io API
 
 ## Description
 
-_Jeopardy trivia game were the user must create an account, log in to play the game.  User will be asked questions and given four choices to choose from. User has five tries before the game ends. Points are added as they play. High score list on home page shows to tem players with highest scores in descending order._
+_Jeopardy trivia game were the user must create an account, log in to play the game.  User will be asked questions and given four choices to choose from. User has five tries before the game ends. Points are added as they play. High score list on home page shows to team players with highest scores in descending order._
 
 ## Setup/Installation Requirements
 *_Clone the repository._
