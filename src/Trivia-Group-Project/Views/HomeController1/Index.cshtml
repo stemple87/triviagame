@@ -7,6 +7,7 @@
 <div id="playerInfo">
 <h1>Trivia!</h1>    
 <div id="Score">Score: </div>
+
     
     
 </div>
@@ -22,11 +23,12 @@
 <div id="4"></div>
 
 <div id="Answers"></div>
+<h1><div class="countdown"></div></h1>
 
 
 
 <!-- Modal -->
-<div class="modal fade" id="textModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="textModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard='false' data-backdrop='static'>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -51,7 +53,7 @@
         return array;
     }
 
-    $(document).ready(function () {
+    var setUpQuestions = function () {
         var arrayLength = 4;
         var numberArray = [];
         for (i = arrayLength; i > 0; i--)
@@ -65,6 +67,50 @@
         $("#" + randomizedArray[1] + "").append("<button class='fail btn btn-block btn-lg btn-info' data-toggle='modal' data-target='#textModal' data-keyboard='false' data-backdrop='static'>@Model["otherAnswer1"]</button><br />")
         $("#" + randomizedArray[2] + "").append("<button class='fail btn btn-block btn-lg btn-info' data-toggle='modal' data-target='#textModal' data-keyboard='false' data-backdrop='static'>@Model["otherAnswer2"]</button><br />")
         $("#" + randomizedArray[3] + "").append("<button class='fail btn btn-block btn-lg btn-info' data-toggle='modal' data-target='#textModal' data-keyboard='false' data-backdrop='static'>@Model["otherAnswer3"]</button><br />")
+    };
+
+    $(document).ready(function () {
+
+        setUpQuestions();
+
+        var timeOutFunction = setTimeout(function(){ timeOut() }, 8000);
+
+        function timeOut() {
+            console.log("timeOut function has run");
+            $.ajax({
+
+                type: 'GET',
+                dataType: 'html',
+                data: { id: this.value },
+                url: '@Url.Action("TimeOutModal")',
+                success: function (result) {
+
+                    $('#Modal').html(result);
+                    $("#textModal").modal('toggle');
+                }
+            });
+
+        }
+
+        function myStopFunction() {
+            clearInterval();
+        }
+
+        //clearInterval(timeOutFunction);
+        //----------
+
+        // start the countdown
+        $(".countdown").text("7");
+        var TimeoutID = window.setTimeout(function(){ $(".countdown").text("6"); }, 1000);
+        var TimeoutID = window.setTimeout(function(){ $(".countdown").text("5"); }, 2000);
+        var TimeoutID = window.setTimeout(function(){ $(".countdown").text("4"); }, 3000);
+        var TimeoutID = window.setTimeout(function(){ $(".countdown").text("3"); }, 4000);
+        var TimeoutID = window.setTimeout(function(){ $(".countdown").text("2"); }, 5000);
+        var TimeoutID = window.setTimeout(function(){ $(".countdown").text("1"); }, 6000);
+        var TimeoutID = window.setTimeout(function(){ $(".countdown").text("0"); }, 6500);
+
+
+        //-------
         $.ajax({
             type: 'GET',
             dataType: 'html',
@@ -75,9 +121,9 @@
             }
         });
         $(".correct").click(function () {
-            console.log(this.value); 
+            console.log(this.value);
             $.ajax({
-                
+
                 type: 'GET',
                 dataType: 'html',
                 data: { id: this.value },
@@ -85,17 +131,12 @@
                 success: function (result) {
 
                     $('#Modal').html(result);
-                    
+
                 }
             });
 
         })
         $(".fail").click(function () {
-            var counter = counter++;
-            if (counter === 5) {
-
-
-            }
             $.ajax({
 
                 type: 'GET',
@@ -109,5 +150,9 @@
             });
 
         })
+
+
+
+
      });
 </script>

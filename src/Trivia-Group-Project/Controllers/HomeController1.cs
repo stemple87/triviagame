@@ -79,7 +79,7 @@ namespace Trivia_Group_Project.Controllers
 
             if (currentPlayer.Tries <= 0)
             {
-                ViewBag.GameOver = "Game Over";
+                ViewBag.GameOver = "Your Score has been saved!";
                 GameModel highScores = new GameModel(points, email);
                 _db.GameModels.Add(highScores);
                 _db.SaveChanges();
@@ -98,6 +98,43 @@ namespace Trivia_Group_Project.Controllers
             }
             
         }
+
+        public async Task<IActionResult> TimeOutModal()
+        {
+            var currentUser = await _userManager.FindByIdAsync(User.GetUserId());
+            var currentPlayer = _db.Players.FirstOrDefault(x => x.User.Id == currentUser.Id);
+
+            currentPlayer.Tries--;
+
+            _db.Entry(currentPlayer).State = EntityState.Modified;
+            _db.SaveChanges();
+            ViewBag.TimeOut = "You ran out of time!";
+            var points = currentPlayer.Points;
+            var email = currentPlayer.Email;
+
+            if (currentPlayer.Tries <= 0)
+            {
+                ViewBag.TimeOut = "Your Score has been saved!";
+                GameModel highScores = new GameModel(points, email);
+                _db.GameModels.Add(highScores);
+                _db.SaveChanges();
+
+                //reset game
+                currentPlayer.Tries = 5;
+                currentPlayer.Points = 0;
+                _db.Entry(currentPlayer).State = EntityState.Modified;
+                _db.SaveChanges();
+
+                //redirect to game over page
+                return View(currentPlayer);
+            }
+            else
+            {
+                return View(currentPlayer);
+            }
+
+        }
+
         public async Task<IActionResult> ShowPointValue()
         {
             var currentPlayer = await _userManager.FindByIdAsync(User.GetUserId());
