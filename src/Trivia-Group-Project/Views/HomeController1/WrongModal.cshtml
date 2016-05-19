@@ -2,14 +2,21 @@
     Layout = "";
 }
 
-@ViewBag.Gameover
+<h3>@ViewBag.Gameover</h3>
 
-@if(ViewBag.Gameover == "Game Over")
+@if (ViewBag.Gameover == "Game Over")
 {
-    @Html.ActionLink("Game Over", "Index", "Home")
+    <br />
+    <br />
+    <a href="/"><button class="btn-danger btn btn-lg btn-default"id="gameOver">Game Over</button></a>
+    <br />
+    <br />
 }
 else
 {
-    @Html.ActionLink("Next question", "Index")
+    <br />
+    <br />
+    <a href="/HomeController1"><button class="btn-warning btn btn-lg btn-default" id="wrongAnswer">Next Question</button></a>
+    <br />
+    <br />
 }
- 
