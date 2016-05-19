@@ -32,3 +32,10 @@ textarea {
         z-index: 10 !important;
     }
 }
+
+#top-ten, #alig-cent {
+    text-align: center;
+    /*display: flex;*/
+    align-items: center;
+    justify-content: center;
+}
