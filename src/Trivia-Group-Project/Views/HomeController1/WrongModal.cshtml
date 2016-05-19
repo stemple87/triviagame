@@ -4,11 +4,12 @@
 <div class="myModal">
     <h3>@ViewBag.Gameover</h3>
 
-    @if (ViewBag.Gameover == "Game Over")
+    @if (ViewBag.Gameover == "Your Score has been saved!")
     {
         <br />
         <br />
-        <a href="/"><button class="btn-danger btn btn-lg btn-default" id="gameOver">Game Over</button></a>
+        <a href="/Home"><button class="btn-danger btn btn-lg btn-default" id="gameOver">Game Over</button></a>
+        <a href="/HomeController1"><button class="btn-success btn btn-lg btn-default" id="">Play Again</button></a>
         <br />
         <br />
     }

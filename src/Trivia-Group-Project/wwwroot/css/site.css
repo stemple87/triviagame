@@ -38,6 +38,7 @@ textarea {
     /*display: flex;*/
     align-items: center;
     justify-content: center;
+}
 
 .myModal {
     width: 50%;
