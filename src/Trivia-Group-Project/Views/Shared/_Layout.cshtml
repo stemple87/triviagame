@@ -48,7 +48,7 @@
                     <ul class="nav navbar-nav">
                         <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                         <li><a asp-controller="Home" asp-action="About">About</a></li>
-                        <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                        <li><a asp-controller="HomeController1" asp-action="Index">Play the Game!</a></li>
                     </ul>
                     @await Html.PartialAsync("_LoginPartial")
                 </div>
@@ -57,9 +57,9 @@
         <div class="container body-content">
             @RenderBody()
             <hr />
-            <footer>
+            <navbar class="navbar-fixed-bottom">
                 <p>&copy; 2016 - Trivia_Group_Project</p>
-            </footer>
+            </navbar>
         </div>
 
         
