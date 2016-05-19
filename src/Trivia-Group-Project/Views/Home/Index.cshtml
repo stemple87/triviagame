@@ -70,10 +70,11 @@
     @foreach (var highScore in Model)
     {
         <li>
-            @Html.DisplayFor(model => highScore.Email)
+            @highScore.Email
+            <br />
             @highScore.Points
         </li>
     }
 </ol>
 
-
+@Html.ActionLink("Play the game!", "Index", "HomeController1")

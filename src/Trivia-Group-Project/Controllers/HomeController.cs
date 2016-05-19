@@ -24,7 +24,8 @@ namespace Trivia_Group_Project.Controllers
 
         public IActionResult Index()
         {
-            return View(_db.GameModels.ToList());
+            //working here
+            return View(_db.GameModels.OrderByDescending(x => x.Points).Take(10).ToList());
         }
 
         public IActionResult About()
