@@ -96,6 +96,11 @@
 
         })
         $(".fail").click(function () {
+            var counter = counter++;
+            if (counter === 5) {
+
+
+            }
             $.ajax({
                 type: 'GET',
                 dataType: 'html',

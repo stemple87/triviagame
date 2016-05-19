@@ -4,4 +4,12 @@
 
 @ViewBag.Gameover
 
-@Html.ActionLink("Next question", "Index")
+@if(ViewBag.Gameover == "Game Over")
+{
+    @Html.ActionLink("Game Over", "Index", "Home")
+}
+else
+{
+    @Html.ActionLink("Next question", "Index")
+}
+ 
