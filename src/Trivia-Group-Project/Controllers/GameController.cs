@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using RestSharp;
-using RestSharp.Authenticators;
 using Microsoft.AspNet.Mvc;
-using Newtonsoft.Json;
 using Trivia_Group_Project.Models;
 using Microsoft.AspNet.Identity;
 using System.Security.Claims;
 using Microsoft.Data.Entity;
 using Microsoft.AspNet.Authorization;
-
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Trivia_Group_Project.Controllers
 {
@@ -49,10 +43,9 @@ namespace Trivia_Group_Project.Controllers
         [HttpPost, ActionName("Index")]
         public IActionResult Game()
         {
-
             return View();
-
         }
+
         public async Task<IActionResult> CorrectModal(int id)
         {
             int points = id;
@@ -64,6 +57,7 @@ namespace Trivia_Group_Project.Controllers
             _db.SaveChanges();
             return View();
         }
+
         public async Task<IActionResult> WrongModal()
         {
             var currentUser = await _userManager.FindByIdAsync(User.GetUserId());
@@ -89,14 +83,11 @@ namespace Trivia_Group_Project.Controllers
                 currentPlayer.Points = 0;
                 _db.Entry(currentPlayer).State = EntityState.Modified;
                 _db.SaveChanges();
-
-                //redirect to game over page
                 return View(currentPlayer);
             } else
             {
                 return View(currentPlayer);
             }
-            
         }
 
         public async Task<IActionResult> TimeOutModal()
@@ -132,15 +123,11 @@ namespace Trivia_Group_Project.Controllers
             {
                 return View(currentPlayer);
             }
-
         }
 
         public async Task<IActionResult> ShowPointValue()
         {
             var currentPlayer = await _userManager.FindByIdAsync(User.GetUserId());
-            
-            var test = _db.Players.FirstOrDefault(x => x.User.Id == currentPlayer.Id);
-            Console.WriteLine(test.Points);
             return View(_db.Players.FirstOrDefault(x => x.User.Id == currentPlayer.Id));
         }
     }

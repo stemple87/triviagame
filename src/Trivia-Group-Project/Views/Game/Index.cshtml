@@ -1,20 +1,18 @@
-﻿
-
-@{
+﻿@{
     ViewData["Title"] = "Game Page";
 }
 
 <div id="playerInfo">
-<h1>Trivia!</h1>    
-<div id="Score">Score: </div>
-
-    
-    
+    <h1>Trivia!</h1>    
+    <div id="Score">Score: </div>
 </div>
+
 <hr />
 <br />
+
 <h1>@Model["question"]</h1>
-<h3>Point Value: @Model["pointValue"]</h3>
+<h3>Point Value: @Model["pointValue"] | Time left: <b><span class="countdown"></span></b> seconds</h3>
+
 <hr />
 
 <div id="1"></div>
@@ -23,8 +21,6 @@
 <div id="4"></div>
 
 <div id="Answers"></div>
-<h1><div class="countdown"></div></h1>
-
 
 
 <!-- Modal -->
@@ -40,8 +36,6 @@
 </div>
 <!-- End of Modal -->
 
-
-@*//NOTE OUT PARTIAL VIEW*@
 <script type="text/javascript">
     function shuffleArray(array) {
         for (var i = array.length - 1; i > 0; i--) {
@@ -69,73 +63,36 @@
         $("#" + randomizedArray[3] + "").append("<button class='fail btn btn-block btn-lg btn-info' data-toggle='modal' data-target='#textModal' data-keyboard='false' data-backdrop='static'>@Model["otherAnswer3"]</button><br />")
     };
 
-
-
     $(document).ready(function () {
         setUpQuestions();
 
         var timeOutFunction = setTimeout(function () { timeOut() }, 8000);
-
         function timeOut() {
-            //TimeoutID
             console.log("timeOut function has run");
             $.ajax({
-
                 type: 'GET',
                 dataType: 'html',
                 data: { id: this.value },
-                url: '@Url.Action("WrongModal")',
+                url: '@Url.Action("TimeOutModal")',
                 success: function (result) {
-
                     $('#Modal').html(result);
                     $("#textModal").modal('toggle');
                 }
             });
-
         }
-        
 
-        //Simon is working here now ***************
         var initialTime = 6;
-
         var timer = setInterval(function () { pageTimer(initialTime) }, 1000);
-
-        
-
         var pageTimer = function () {
-            
             console.log("Hello")
-
             $(".countdown").text(initialTime)
             initialTime--;
-            
             if (initialTime < 0) {
                 clearInterval(timer);
                 initialTime = 6;
             }
         }
 
-
-
-        
-        //Simon is working here now ***************
-
-
-        //clearInterval(timeOutFunction);
-        //----------
-
-        // start the countdown
-        //$(".countdown").text("7");
-        //var TimeoutID = window.setTimeout(function(){ $(".countdown").text("6"); }, 1000);
-        //var TimeoutID = window.setTimeout(function(){ $(".countdown").text("5"); }, 2000);
-        //var TimeoutID = window.setTimeout(function(){ $(".countdown").text("4"); }, 3000);
-        //var TimeoutID = window.setTimeout(function(){ $(".countdown").text("3"); }, 4000);
-        //var TimeoutID = window.setTimeout(function(){ $(".countdown").text("2"); }, 5000);
-        //var TimeoutID = window.setTimeout(function(){ $(".countdown").text("1"); }, 6000);
-        //var TimeoutID = window.setTimeout(function(){ $(".countdown").text("0"); }, 6500);
-
-
-        //-------
         $.ajax({
             type: 'GET',
             dataType: 'html',
@@ -145,43 +102,34 @@
                 $('#Score').html(result);
             }
         });
+
         $(".correct").click(function () {
             clearTimeout(timeOutFunction);
             clearInterval(timer);
             console.log(this.value);
             $.ajax({
-
                 type: 'GET',
                 dataType: 'html',
                 data: { id: this.value },
                 url: '@Url.Action("CorrectModal")',
                 success: function (result) {
-
                     $('#Modal').html(result);
-
                 }
             });
-
         })
+
         $(".fail").click(function () {
             clearTimeout(timeOutFunction);
             clearInterval(timer);
             $.ajax({
-
                 type: 'GET',
                 dataType: 'html',
                 data: { id: this.value },
                 url: '@Url.Action("WrongModal")',
                 success: function (result) {
-
                     $('#Modal').html(result);
                 }
             });
-
         })
-
-
-
-
      });
 </script>

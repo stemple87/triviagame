@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "";
+}
+<div class="myModal">
+    <h3>@ViewBag.TimeOut</h3>
+
+    @if (ViewBag.TimeOut == "Your Score has been saved!")
+    {
+        <br />
+        <br />
+        <a href="/Home"><button class="btn-danger btn btn-lg btn-default" id="gameOver">Game Over</button></a>
+        <a href="/Game"><button class="btn-success btn btn-lg btn-default" id="">Play Again</button></a>
+        <br />
+        <br />
+    }
+    else
+    {
+        <br />
+        <br />
+        <a href="/Game"><button class="btn-warning btn btn-lg btn-default" id="wrongAnswer">Next Question</button></a>
+        <br />
+        <br />
+    }
+</div>

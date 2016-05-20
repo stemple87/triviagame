@@ -46,3 +46,7 @@ textarea {
     margin-right: auto;
     padding-left: 12%;
 }
+
+.countdown {
+    color: red;
+}
